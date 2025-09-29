@@ -2,42 +2,42 @@ package library.model;
 
 public abstract class Item {
     private int id;
-    private String titulo;
-    private String autor;
-    private Boolean disponible = true;
+    private String title;
+    private String author;
+    private Boolean available = true;
 
-    public Item(int id, String titulo, String autor) {
+    public Item(int id, String title, String author) {
         this.id = id;
-        this.titulo = titulo;
-        this.autor = autor;
+        this.title = title;
+        this.author = author;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public String getAutor() {
-        return autor;
+    public String getAuthor() {
+        return author;
     }
 
-    public Boolean getDisponible() {
-        return disponible;
+    public Boolean getAvailable() {
+        return available;
     }
 
-    public void setTitulo(String titulo) {
-        if(titulo != null && !titulo.isBlank()){
-            this.titulo = titulo;
+    public void setTitle(String title) {
+        if(title != null && !title.isBlank()){
+            this.title = title;
         }
 
     }
 
-    public void setAutor(String autor) {
+    public void setAuthor(String autor) {
         if(autor != null && !autor.isBlank()){
-            this.autor = autor;
+            this.author = autor;
         }
     }
 
@@ -47,15 +47,15 @@ public abstract class Item {
         }
     }
 
-    public void setDisponible(Boolean disponible) {
-        this.disponible = disponible;
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
-    public abstract String getTipo();
+    public abstract String getType();
 
     @Override
     public String toString() {
-        return getTipo() + " [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", disponible=" + disponible + "]";
+        return getType() + " [id=" + id + ", title=" + title + ", author=" + author + ", available=" + available + "]";
     }
 
 }
