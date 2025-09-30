@@ -14,7 +14,7 @@ public class MenuUI {
         this.userUI = new UserUI();
     }
 
-    /**1
+    /**
      * Starts the main menu application
      */
     public void start() {
