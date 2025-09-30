@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO{
     private static final String INSERT_SQL = "INSERT INTO users (user_id, name,email) VALUES (?, ?,?)";
-    private static final String SELECT_BY_ID_SQL = "SELECT FROM * users WHERE id=?";
+    private static final String SELECT_BY_ID_SQL = "SELECT * FROM users WHERE user_id=?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM users";
 
 
