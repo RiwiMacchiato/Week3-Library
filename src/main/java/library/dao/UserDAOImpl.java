@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO{
 
             stmt = connection.prepareStatement(INSERT_SQL);
 
-            //preparing the sql querry
+            //preparing the sql query
             stmt.setInt(1,user.getId());
             stmt.setString(2,user.getName());
 
