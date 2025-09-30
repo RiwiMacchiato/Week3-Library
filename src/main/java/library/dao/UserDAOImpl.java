@@ -105,7 +105,7 @@ public class UserDAOImpl implements UserDAO{
             ArrayList<User> users = new ArrayList<>();
 
             while(rs.next()){
-                int userId = rs.getInt("dni");
+                int userId = rs.getInt("user_id");
                 String userName = rs.getString("name");
                 String userEmail = rs.getString("email");
 
