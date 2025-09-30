@@ -1,14 +1,14 @@
 package library.dao;
 
-import library.config.ConnectionManager;
-import library.model.Magazine;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import library.config.ConnectionManager;
+import library.model.Magazine;
 
 public class MagazineDAOImpl implements MagazineDAO{
     @Override
@@ -22,7 +22,7 @@ public class MagazineDAOImpl implements MagazineDAO{
             connection = ConnectionManager.getInstance().getConnection();
 
             //inserting first the item
-            stmt = connection.prepareStatement("INSERT INTO items(title,published_year,user_id) VALUES(?,?,?)");
+            stmt = connection.prepareStatement("INSERT INTO items(title,published_year,user_id) VALUES(?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 
 
             //preparing the sql query for the item
@@ -80,7 +80,7 @@ public class MagazineDAOImpl implements MagazineDAO{
         try{
             connection = ConnectionManager.getInstance().getConnection();
 
-            stmt = connection.prepareStatement("SELECT * FROM magazines m INNER JOIN items i ON m.magazine_id = i.item_id WHERE b.book_id=?");
+            stmt = connection.prepareStatement("SELECT * FROM magazines m INNER JOIN items i ON m.magazine_id = i.item_id WHERE m.magazine_id=?");
 
             stmt.setInt(1,id);
 
