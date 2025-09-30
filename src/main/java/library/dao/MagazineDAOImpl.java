@@ -18,14 +18,14 @@ public class MagazineDAOImpl implements MagazineDAO{
         PreparedStatement stmt2 = null;
         ResultSet generatedKeys = null;
         try{
-            //obtaining the conection from the ConnectionManager
+            //obtaining the connection from the ConnectionManager
             connection = ConnectionManager.getInstance().getConnection();
 
             //inserting first the item
             stmt = connection.prepareStatement("INSERT INTO items(title,published_year,user_id) VALUES(?,?,?)");
 
 
-            //preparing the sql querry for the item
+            //preparing the sql query for the item
             stmt.setString(1,magazine.getTitle());
             stmt.setInt(2,magazine.getPublishedYear());
             stmt.setInt(3,magazine.getUserId());
