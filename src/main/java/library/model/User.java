@@ -1,16 +1,18 @@
 package library.model;
 
 public class User {
-    private long dni;
+    private int id;
     private String name;
+    private String email;
 
-    public User(String name, long dni) {
+    public User(String name, int id, String email) {
         this.name = name;
-        this.dni = dni;
+        this.id = id;
+        this.email = email;
     }
 
-    public long getDNI() {
-        return dni;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -23,9 +25,19 @@ public class User {
         }
     }
 
-    public void setDNI(long DNI) {
-        if(DNI > 0){
-            this.dni = DNI;
+    public void setId(int id) {
+        if(id > 0){
+            this.id = id;
+        }
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        if(email != null && !email.isBlank()){
+            this.email = email;
         }
     }
 }

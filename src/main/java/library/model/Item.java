@@ -3,13 +3,14 @@ package library.model;
 public abstract class Item {
     private int id;
     private String title;
-    private String author;
-    private Boolean available = true;
+    private int publishedYear;
+    private int userId;
 
-    public Item(int id, String title, String author) {
+    public Item(int id, String title, int publishedYear, int userId) {
         this.id = id;
         this.title = title;
-        this.author = author;
+        this.publishedYear = publishedYear;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -20,14 +21,6 @@ public abstract class Item {
         return title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
     public void setTitle(String title) {
         if(title != null && !title.isBlank()){
             this.title = title;
@@ -35,11 +28,6 @@ public abstract class Item {
 
     }
 
-    public void setAuthor(String autor) {
-        if(autor != null && !autor.isBlank()){
-            this.author = autor;
-        }
-    }
 
     public void setId(int id) {
         if(id > 0){
@@ -47,15 +35,36 @@ public abstract class Item {
         }
     }
 
-    public void setAvailable(Boolean available) {
-        this.available = available;
+
+    public int getPublishedYear() {
+        return publishedYear;
+    }
+
+    public void setPublishedYear(int publishedYear) {
+        if(publishedYear >0){
+            this.publishedYear = publishedYear;
+        }
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        if(userId > 0){
+            this.userId = userId;
+        }
     }
 
     public abstract String getType();
 
     @Override
     public String toString() {
-        return getType() + " [id=" + id + ", title=" + title + ", author=" + author + ", available=" + available + "]";
+        return "Item{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", publishedYear=" + publishedYear +
+                ", userId=" + userId +
+                '}';
     }
-
 }
