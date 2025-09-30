@@ -1,14 +1,17 @@
 package library.dao;
 
-import library.config.ConnectionManager;
-import library.model.User;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import library.config.ConnectionManager;
+import library.model.User;
+
 public class UserDAOImpl implements UserDAO{
-    private static final String INSERT_SQL = "INSERT INTO users (user_id, name,email) VALUES (?, ?,?)";
+    private static final String INSERT_SQL = "INSERT INTO users (name,email) VALUES (?,?)";
     private static final String SELECT_BY_ID_SQL = "SELECT * FROM users WHERE user_id=?";
     private static final String SELECT_ALL_SQL = "SELECT * FROM users";
 
@@ -24,8 +27,8 @@ public class UserDAOImpl implements UserDAO{
             stmt = connection.prepareStatement(INSERT_SQL);
 
             //preparing the sql query
-            stmt.setInt(1,user.getId());
-            stmt.setString(2,user.getName());
+            stmt.setString(1,user.getName());
+            stmt.setString(2,user.getEmail());
 
             int rowAffected = stmt.executeUpdate();
 
@@ -59,7 +62,7 @@ public class UserDAOImpl implements UserDAO{
             connection = ConnectionManager.getInstance().getConnection();
 
             stmt = connection.prepareStatement(SELECT_BY_ID_SQL);
-            stmt.setLong(1,id);
+            stmt.setInt(1,id);
 
             rs = stmt.executeQuery();
 
@@ -112,6 +115,7 @@ public class UserDAOImpl implements UserDAO{
                 users.add(new User(userName,userId, userEmail));
             }
 
+            return users;
 
         }catch (SQLException e){
             System.out.println("Error finding all the users: " + e.getMessage());
@@ -124,6 +128,6 @@ public class UserDAOImpl implements UserDAO{
             }
             ConnectionManager.getInstance().closeConnection(connection);
         }
-        return null;
+        return new ArrayList<>();
     }
 }
