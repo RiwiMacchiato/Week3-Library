@@ -9,9 +9,13 @@ import javax.swing.JOptionPane;
 public class MenuUI {
     
     private final UserUI userUI;
+    private final BookUI bookUI;
+    private final MagazineUI magazineUI;
 
     public MenuUI() {
         this.userUI = new UserUI();
+        this.bookUI = new BookUI();
+        this.magazineUI = new MagazineUI();
     }
 
     /**
@@ -60,10 +64,10 @@ public class MenuUI {
                     showUserMenu();
                     break;
                 case 2:
-                    JOptionPane.showMessageDialog(null, "Book Management - Coming Soon!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                    showBookMenu();
                     break;
                 case 3:
-                    JOptionPane.showMessageDialog(null, "Magazine Management - Coming Soon!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                    showMagazineMenu();
                     break;
                 case 4:
                     JOptionPane.showMessageDialog(null, "Thank you for using Library Management System!", "Exit", JOptionPane.INFORMATION_MESSAGE);
@@ -122,6 +126,116 @@ public class MenuUI {
                         break;
                     case 5:
                         inUserMenu = false;
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Invalid option. Please select 1-5.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (NumberFormatException error) {
+                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    /**
+     * Displays the book management submenu
+     */
+    private void showBookMenu() {
+        boolean inBookMenu = true;
+        
+        while (inBookMenu) {
+            String bookMenu = """
+                    === BOOK MANAGEMENT ===
+                    
+                    Select an option:
+                    1. Add Book
+                    2. Find Book by ID
+                    3. List All Books
+                    4. Advanced Book Management
+                    5. Back to Main Menu
+                    
+                    Enter your choice (1-5):""";
+
+            String choice = JOptionPane.showInputDialog(null, bookMenu, "Book Management", JOptionPane.QUESTION_MESSAGE);
+
+            // If user cancels or closes dialog
+            if (choice == null) {
+                inBookMenu = false;
+                continue;
+            }
+
+            try {
+                int option = Integer.parseInt(choice.trim());
+
+                switch (option) {
+                    case 1:
+                        bookUI.addBook();
+                        break;
+                    case 2:
+                        bookUI.findBook();
+                        break;
+                    case 3:
+                        bookUI.listAllBooks();
+                        break;
+                    case 4:
+                        bookUI.showBookManagement();
+                        break;
+                    case 5:
+                        inBookMenu = false;
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Invalid option. Please select 1-5.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (NumberFormatException error) {
+                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a number.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    /**
+     * Displays the magazine management submenu
+     */
+    private void showMagazineMenu() {
+        boolean inMagazineMenu = true;
+        
+        while (inMagazineMenu) {
+            String magazineMenu = """
+                    === MAGAZINE MANAGEMENT ===
+                    
+                    Select an option:
+                    1. Add Magazine
+                    2. Find Magazine by ID
+                    3. List All Magazines
+                    4. Advanced Magazine Management
+                    5. Back to Main Menu
+                    
+                    Enter your choice (1-5):""";
+
+            String choice = JOptionPane.showInputDialog(null, magazineMenu, "Magazine Management", JOptionPane.QUESTION_MESSAGE);
+
+            // If user cancels or closes dialog
+            if (choice == null) {
+                inMagazineMenu = false;
+                continue;
+            }
+
+            try {
+                int option = Integer.parseInt(choice.trim());
+
+                switch (option) {
+                    case 1:
+                        magazineUI.addMagazine();
+                        break;
+                    case 2:
+                        magazineUI.findMagazine();
+                        break;
+                    case 3:
+                        magazineUI.listAllMagazines();
+                        break;
+                    case 4:
+                        magazineUI.showMagazineManagement();
+                        break;
+                    case 5:
+                        inMagazineMenu = false;
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Invalid option. Please select 1-5.", "Error", JOptionPane.ERROR_MESSAGE);

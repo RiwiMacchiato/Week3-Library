@@ -47,22 +47,33 @@ public class MagazineDAOImpl implements MagazineDAO{
             stmt2.setInt(2,magazine.getIssue_number());
             stmt2.setString(3,magazine.getPublisher());
 
-
             int rowAffected1 = stmt2.executeUpdate();
-
+            
+            // Commit the transaction
+            connection.commit();
+            System.out.println("Magazine saved successfully with ID: " + generatedKey);
 
         }catch (SQLException e){
             System.out.println("Error saving the magazine: " + e.getMessage());
-
+            // Rollback transaction on error
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                    System.out.println("Transaction rolled back");
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error during rollback: " + ex.getMessage());
+            }
         }finally {
             // close preparedStatement and connection
             try {
+                if(generatedKeys!=null) generatedKeys.close();
                 if(stmt!=null) stmt.close();
                 if(stmt2!=null) stmt2.close();
             } catch (SQLException e){
                 System.out.println("Error closing the statement: " + e.getMessage());
             }
-
+            ConnectionManager.getInstance().closeConnection(connection);
         }
     }
 

@@ -27,7 +27,7 @@ src/main/resources/database.properties
 src/main/resources/
 
 
-.idea
+.idea/
 Week3-Library.iml
 target/classes/database.properties
 target/
