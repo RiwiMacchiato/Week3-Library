@@ -50,20 +50,32 @@ public class BookDAOImpl implements BookDAO{
             stmt2.setInt(4,book.getPages());
 
             int rowAffected1 = stmt2.executeUpdate();
-
+            
+            // Commit the transaction
+            connection.commit();
+            System.out.println("Book saved successfully with ID: " + generatedKey);
 
         }catch (SQLException e){
             System.out.println("Error saving the book: " + e.getMessage());
-
+            // Rollback transaction on error
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                    System.out.println("Transaction rolled back");
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error during rollback: " + ex.getMessage());
+            }
         }finally {
             // close preparedStatement and connection
             try {
+                if(generatedKeys!=null) generatedKeys.close();
                 if(stmt!=null) stmt.close();
                 if(stmt2!=null) stmt2.close();
             } catch (SQLException e){
                 System.out.println("Error closing the statement: " + e.getMessage());
             }
-
+            ConnectionManager.getInstance().closeConnection(connection);
         }
     }
 

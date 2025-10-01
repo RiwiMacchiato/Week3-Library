@@ -31,11 +31,22 @@ public class UserDAOImpl implements UserDAO{
             stmt.setString(2,user.getEmail());
 
             int rowAffected = stmt.executeUpdate();
-
+            
+            // Commit the transaction
+            connection.commit();
+            System.out.println("User saved successfully");
 
         }catch (SQLException e){
             System.out.println("Error saving the user: " + e.getMessage());
-
+            // Rollback transaction on error
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                    System.out.println("Transaction rolled back");
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error during rollback: " + ex.getMessage());
+            }
         }finally {
             // close preparedStatement and connection
             try {
@@ -43,7 +54,7 @@ public class UserDAOImpl implements UserDAO{
             } catch (SQLException e){
                 System.out.println("Error closing the statement: " + e.getMessage());
             }
-
+            ConnectionManager.getInstance().closeConnection(connection);
         }
     }
 

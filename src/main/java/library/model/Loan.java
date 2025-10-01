@@ -9,65 +9,51 @@ public class Loan {
     private LocalDate loanDate;
     private LocalDate returnDate;
 
-    public Loan(int id, User user, Item item, LocalDate loanDate) {
+    public Loan(int id, User user, Item item, LocalDate loanDate, LocalDate returnDate) {
         this.id = id;
         this.user = user;
         this.item = item;
         this.loanDate = loanDate;
-        this.returnDate = null;
-        item.setAvailable(false);
+        this.returnDate = returnDate;
     }
 
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Item getItem() {
         return item;
     }
 
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
     public LocalDate getLoanDate() {
         return loanDate;
+    }
+
+    public void setLoanDate(LocalDate loanDate) {
+        this.loanDate = loanDate;
     }
 
     public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setId(int id) {
-        if(id > 0){
-            this.id = id;
-        }
-    }
-
-    public void setUser(User user) {
-        if(user != null){
-            this.user = user;
-        }
-    }
-
-    public void setItem(Item item) {
-        if(item != null){
-            this.item = item;
-        }
-    }
-
-    public void setLoanDate(LocalDate loanDate) {
-        if(loanDate != null){
-            this.loanDate = loanDate;
-        }
-    }
-
     public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
-    }
-
-    public void returnItem(){
-        returnDate = LocalDate.now();
-        item.setAvailable(true);
     }
 }
